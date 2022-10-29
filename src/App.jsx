@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     if(messages.length > 0 && messages.slice(-1)[0].author !== 'robot')  {
-      setTimeout(() => setMessages(prev => [...prev, {text: messageRobot, author: 'robot', id: v4()}]), 1000) 
+      setTimeout(() => setMessages(prev => [...prev, {text: messageRobot, author: 'robot', id: v4()}]), 1500) 
     }
   },[messages])
 
