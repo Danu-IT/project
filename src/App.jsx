@@ -16,7 +16,7 @@ const App = () => {
     setInput(initialState);
   }
 
-  const messageRobot = 'Привет, получил твое сообщение, готов получать данные';
+  const messageRobot = 'Привет, получил твое сообщение, готов обрабатывать данные';
 
   useEffect(() => {
     if(messages.length > 0 && messages.slice(-1)[0].author !== 'robot')  {

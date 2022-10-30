@@ -3,12 +3,13 @@ import classes from './Messages.module.scss'
 
 const Messages = ({messages}) => {
   return (
-    <div className={classes.dialog}>
+    <div>
       <h1 style={{textAlign: 'center'}}>Dialog</h1>
         {messages.map(message => {
+          console.log(message)
           return (
-            <div key={message.id}>
-              <div className={classes.message}>
+            <div className={classes.dialog} style={{alignItems: message.author === 'robot' ? 'flex-end' : 'flex-start'}} key={message.id}>
+              <div style={{background: message.author === 'robot' ? 'blue': 'rgb(42, 219, 42)', color: message.author === 'robot' ? 'white' : 'black'}} className={classes.message}>
                 <h1>{message.author}</h1>
                 <div>{message.text}</div>
               </div>
