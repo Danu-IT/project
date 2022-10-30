@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { v4 } from 'uuid';
+import { timeNow } from '../../utils/time';
 import classes from './Form.module.scss'
 
 const Form = ({addingNewMessage, obj, setObj}) => {
@@ -19,7 +20,8 @@ const Form = ({addingNewMessage, obj, setObj}) => {
         return {
             id: v4(),
             text: text,
-            author: author
+            author: author,
+            time: timeNow()
         }
     }
 

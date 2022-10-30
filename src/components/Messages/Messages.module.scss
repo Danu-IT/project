@@ -6,9 +6,13 @@
 .message{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     padding: 10px;
     margin: 10px;
     width: 400px;
     border-radius: 20px;
+    &__up{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }

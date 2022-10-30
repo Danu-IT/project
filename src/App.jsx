@@ -4,6 +4,7 @@ import './App.css';
 
 import Form from './components/Form/Form';
 import Messages from './components/Messages/Messages';
+import { timeNow } from './utils/time';
 
 const App = () => {
   const initialState = {text: '', author: '', id: 1};
@@ -20,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     if(messages.length > 0 && messages.slice(-1)[0].author !== 'robot')  {
-      setTimeout(() => setMessages(prev => [...prev, {text: messageRobot, author: 'robot', id: v4()}]), 1500) 
+      setTimeout(() => setMessages(prev => [...prev, {text: messageRobot, author: 'robot', id: v4(), time: timeNow()}]), 1500) 
     }
   },[messages])
 
