@@ -1,0 +1,29 @@
+.form{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    &__container{
+        display: flex;
+        flex-direction: column;
+        width: 350px;   
+        & > * {
+            margin-bottom: 5px;
+        }
+        & > input {
+            padding: 5px;
+            color: black;
+            outline: none;
+            border: 2px solid rgb(1, 34, 1);
+        }     
+        & > button {
+            padding: 5px 0;
+            border: 2px solid rgb(1, 34, 1);
+            cursor: pointer;
+            &:hover{
+                transition-duration: .5s;
+                background: yellow;
+                color: rgb(1, 34, 1);
+            }
+        }
+    }
+}
