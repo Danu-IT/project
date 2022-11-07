@@ -5,7 +5,7 @@ import classes from './ListChats.module.scss'
 const ListChats = ({chats}) => {
     const theme = useTheme()
   return (
-    <List style={{background: theme.palette.success.main, color: theme.palette.text.secondary}} className={classes.chats} component="div" href="#simple-list">
+    <List style={{background: theme.palette.primary.main, color: theme.palette.text.secondary}} className={classes.chats} component="div" href="#simple-list">
         <h2 style={{textAlign: 'center'}}>Chats</h2>
         {chats.map((chat,i) => {
             return(

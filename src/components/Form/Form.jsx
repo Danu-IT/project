@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { v4 } from 'uuid';
 import { timeNow } from '../../utils/time';
 import classes from './Form.module.scss'
-import { InputBase } from '@mui/material';
+import { Button, InputBase } from '@mui/material';
 import { useTheme } from '@emotion/react';
 
 const Form = ({addingNewMessage, obj, setObj}) => {
@@ -44,10 +44,10 @@ const Form = ({addingNewMessage, obj, setObj}) => {
   return (
     <form className={classes.form} onSubmit={formSubmit}>
         <div className={classes.form__container}>
-            <InputBase style={{background: theme.palette.primary.main, color: theme.palette.text.primary}} ref={focus} className='textInput' placeholder='Автор сообщения' type="text" value={author} onChange={(e) => setObj(prev => ({...prev, author: e.target.value}))} autoFocus></InputBase>
+            <InputBase style={{color: 'black'}} ref={focus} className='textInput' placeholder='Автор сообщения' type="text" value={author} onChange={(e) => setObj(prev => ({...prev, author: e.target.value}))} autoFocus></InputBase>
             {nameError && <p style={{color: 'red',fontSize: '14px', background: 'inherit', border: 'none'}}>Нельзя использовать зарезервированное имя автора</p>}
-            <InputBase style={{background: theme.palette.primary.main, color: theme.palette.text.primary}} className='textInput' placeholder='Текст сообщения' type="text" value={text} onChange={(e) => setObj(prev => ({...prev, text: e.target.value}))}/>
-            <button>Отправить</button>
+            <InputBase style={{color: 'black'}} className='textInput' placeholder='Текст сообщения' type="text" value={text} onChange={(e) => setObj(prev => ({...prev, text: e.target.value}))}/>
+            <button variant="text">Отправить</button>
             {clusterFilling && <p style={{color: 'red',fontSize: '14px', background: 'inherit', border: 'none'}}>Заполните все поля</p>}
         </div>
     </form>

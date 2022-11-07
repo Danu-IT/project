@@ -3,7 +3,7 @@ import classes from './Messages.module.scss'
 
 const Messages = ({messages}) => {
   return (
-    <div>
+    <div style={{minHeight: '100vh'}}>
       <h1 style={{textAlign: 'center'}}>Dialog</h1>
         {messages.map(message => {
           return (

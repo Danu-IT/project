@@ -1,5 +1,5 @@
 import Switch from '@mui/material/Switch'; 
-import { createTheme, ThemeProvider } from '@mui/material';
+import {  ThemeProvider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { v4 } from 'uuid';
 import './App.css';
@@ -9,14 +9,7 @@ import ListChats from './components/ListChats/ListChats';
 import Messages from './components/Messages/Messages';
 import { timeNow } from './utils/time';
 import { useTheme } from '@emotion/react';
-
-const lightTheme = createTheme();
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+import { darkTheme, lightTheme } from '.';
 
 const App = () => {
   const initialState = {text: '', author: '', id: 1}; 
@@ -24,7 +17,7 @@ const App = () => {
   const [chats, setChats] = useState([{id: v4(), name: 'Олег'}, {id: v4(), name: 'Сергей'}]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState(initialState);
-  const theme = useTheme()
+  const theme = useTheme();
 
   const addingNewMessage = (message) => {
     setMessages([...messages, message]);
@@ -41,9 +34,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <div className="App">
+      <div style={{background: isDark ? 'rgb(218, 238, 255)' : 'rgb(2, 57, 112)'}} className="App">
         <ListChats chats={chats}></ListChats>
-        <div className='dialog'>
+        <div style={{color: 'black'}} className='dialog'>
           <Switch value={isDark} onChange={() => setIsDark(prev => !prev)} />
           <Form addingNewMessage={addingNewMessage} obj={input} setObj={setInput}></Form>
           <hr></hr>
