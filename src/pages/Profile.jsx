@@ -1,9 +1,16 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const visible = useSelector(state => state);
+  console.log(visible)
+  const visibleContent = () => dispatch({type: 'TOGGLE'});
   return (
-    <div>Profile</div>
-  )
-}
+    <>
+       <input onChange={visibleContent} type='checkbox'></input>
+       {visible && <div>Изменияем Store</div>}
+    </>
+)}
 
 export default Profile
