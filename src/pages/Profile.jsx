@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const Profile = () => {
   const dispatch = useDispatch();
   const visible = useSelector(state => state);
-  console.log(visible)
   const visibleContent = () => dispatch({type: 'TOGGLE'});
   return (
     <>
