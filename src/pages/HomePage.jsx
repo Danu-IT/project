@@ -1,35 +1,39 @@
 import Switch from '@mui/material/Switch'; 
 import { ThemeProvider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { v4 } from 'uuid';
 import '../App.css';
 
 import Form from '../components/Form/Form';
 import ListChats from '../components/ListChats/ListChats';
 import Messages from '../components/Messages/Messages';
-import { timeNow } from '../utils/time';
 import { darkTheme, lightTheme } from '../index';
 import NavigateCustom from '../components/Navigate';
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HomePage = () => {
   const initialState = {text: '', author: '', id: 1}; 
   const [isDark, setIsDark] = useState(false);
-  const [chats, setChats] = useState([{id: v4(), name: 'Олег'}, {id: v4(), name: 'Сергей'}]);
-  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState(initialState);
+  const params = useParams();
+  const dispatch = useDispatch();
+  const chats = useSelector(state => state)
+  const nowMessages = params['*'];
 
   const addingNewMessage = (message) => {
-    setMessages([...messages, message]);
-    setInput(initialState);
+    if(nowMessages) {
+      const param = nowMessages.split('chats:')[1];
+      dispatch({type: 'ADD_MESSAGE', payload: [param, message]});
+      setInput(initialState);
+    }
   }
 
-  const messageRobot = 'Привет, получил твое сообщение, готов обрабатывать данные';
-
   useEffect(() => {
-    if(messages.length > 0 && messages.slice(-1)[0].author !== 'robot')  {
-      setTimeout(() => setMessages(prev => [...prev, {text: messageRobot, author: 'robot', id: v4(), time: timeNow()}]), 1500) 
-    }
-  },[messages])
+  if(nowMessages){
+    const param = nowMessages.split('chats:')[1];
+    setTimeout(() => dispatch({type: 'ADD_ROBOT_MESSAGE', payload: param}), 1500)
+  }
+  },[chats])
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -40,7 +44,7 @@ const HomePage = () => {
         <div style={{color: 'black'}} className='dialog'>
           <Switch value={isDark} onChange={() => setIsDark(prev => !prev)} />
           <Form addingNewMessage={addingNewMessage} obj={input} setObj={setInput}></Form>
-          <Messages messages={messages}></Messages>
+          <Messages chats={chats}></Messages>
         </div>
       </div>
     </ThemeProvider>

@@ -14,7 +14,7 @@ const Form = ({addingNewMessage, obj, setObj}) => {
 
     const validationAndCreateMessage = (text, author) => {
         if(author === 'robot'){
-            setNameError(true);
+            setNameError(true); 
             return false;
         }
         if(author === '' || text === ''){
@@ -25,7 +25,7 @@ const Form = ({addingNewMessage, obj, setObj}) => {
             id: v4(),
             text: text,
             author: author,
-            time: timeNow()
+            time: timeNow(),
         }
     }
 

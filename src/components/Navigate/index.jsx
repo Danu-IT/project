@@ -5,7 +5,7 @@ const NavigateCustom = () => {
   return (
     <div>
         <Link to='/'>Главная</Link>
-        <Link to='/chats:id'>Чаты</Link>
+        <Link to='/dialog:id'>Чаты</Link>
         <Link to='/profile'>Профиль</Link>
     </div>
   )

@@ -1,5 +1,6 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { toggleReducer } from "./tooglerReducer";
+import { chatReducer } from "./chatsReducer";
+// import { toggleReducer } from "./tooglerReducer";
 
-export const store = createStore(toggleReducer, composeWithDevTools(applyMiddleware()))
+export const store = createStore(chatReducer, composeWithDevTools(applyMiddleware()))

@@ -1,8 +1,8 @@
 export const toggleReducer = (state = false, action) => {
     switch (action.type) {  
-      case 'TOGGLE':
+      case 'TOGGLE':  
         return !state
-      default: 
+      default:
         return state;
     }
 }
