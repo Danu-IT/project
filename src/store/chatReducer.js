@@ -8,7 +8,6 @@ const messageRobot = 'Привет, получил твое сообщение, 
 export const fetchItems = createAsyncThunk(
   'fetchItems',
   async function(_,thunkApi){
-      console.log(thunkApi)
       const response = await fetch('https://jsonplaceholder.typicode.com/users')
       const data = response.json()
       // Промис
