@@ -3,14 +3,15 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { v4 } from 'uuid';
+import { addChat } from '../../store/chatReducer';
 import classes from './ListChats.module.scss'
 
 const ListChats = ({chats, children}) => {
   const theme = useTheme();
   const dispatch = useDispatch()
-  const addChat = () => {
+  const addChats = () => {
     const chat = {id: v4(), name: 'Ольга', messages: []}
-    dispatch({type: 'ADD_CHAT', payload: chat})
+    dispatch(addChat(chat))
   }
   return (
     <>
@@ -24,7 +25,7 @@ const ListChats = ({chats, children}) => {
                 </ListItemText>
             )
         })}
-        <div onClick={addChat} style={{cursor: 'pointer'}}>Add a chat +</div> 
+        <div onClick={addChats} style={{cursor: 'pointer'}}>Add a chat +</div> 
     </List>
     </>
   )

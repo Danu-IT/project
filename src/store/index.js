@@ -1,6 +1,8 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { chatReducer } from "./chatsReducer";
-// import { toggleReducer } from "./tooglerReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import chatReducer from "./chatReducer";
 
-export const store = createStore(chatReducer, composeWithDevTools(applyMiddleware()))
+export const store = configureStore({
+    reducer: {
+        chats: chatReducer
+    },
+})

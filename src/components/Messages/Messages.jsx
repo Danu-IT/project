@@ -13,7 +13,7 @@ const Messages = ({chats}) => {
       <h1 style={{textAlign: 'center'}}>Dialog</h1>
         {chats[nowMessages - 1].messages && chats[nowMessages - 1].messages.map(message => {
           return (
-            <div onClick={console.log(message)} className={classes.dialog} style={{alignItems: message.author === 'robot' ? 'flex-end' : 'flex-start'}} key={message.id}>
+            <div className={classes.dialog} style={{alignItems: message.author === 'robot' ? 'flex-end' : 'flex-start'}} key={message.id}>
               <div style={{background: message.author === 'robot' ? 'blue': 'rgb(42, 219, 42)', color: message.author === 'robot' ? 'white' : 'black'}} className={classes.message}>
                 <div className={classes.message__up}>
                   <h1>{message.author}</h1>

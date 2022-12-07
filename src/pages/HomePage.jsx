@@ -10,6 +10,7 @@ import { darkTheme, lightTheme } from '../index';
 import NavigateCustom from '../components/Navigate';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { addMessage, addRobotMessage, getPosts } from '../store/chatReducer';
 
 const HomePage = () => {
   const initialState = {text: '', author: '', id: 1}; 
@@ -17,22 +18,23 @@ const HomePage = () => {
   const [input, setInput] = useState(initialState);
   const params = useParams();
   const dispatch = useDispatch();
-  const chats = useSelector(state => state)
+  const chats = useSelector(state => state.chats)
   const nowMessages = params['*'];
 
   const addingNewMessage = (message) => {
     if(nowMessages) {
       const param = nowMessages.split('chats:')[1];
-      dispatch({type: 'ADD_MESSAGE', payload: [param, message]});
+      dispatch(addMessage([param, message]));
       setInput(initialState);
     }
   }
 
   useEffect(() => {
-  if(nowMessages){
-    const param = nowMessages.split('chats:')[1];
-    setTimeout(() => dispatch({type: 'ADD_ROBOT_MESSAGE', payload: param}), 1500)
-  }
+    if(nowMessages){
+      const param = nowMessages.split('chats:')[1];
+      // setTimeout(() => dispatch(addRobotMessage(param)), 1500)
+      dispatch(getPosts(param))
+    }
   },[chats])
 
   return (
