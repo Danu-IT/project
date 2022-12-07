@@ -10,7 +10,7 @@ import { darkTheme, lightTheme } from '../index';
 import NavigateCustom from '../components/Navigate';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage, addRobotMessage, getPosts } from '../store/chatReducer';
+import { addMessage, fetchItems } from '../store/chatReducer';
 
 const HomePage = () => {
   const initialState = {text: '', author: '', id: 1}; 
@@ -32,8 +32,9 @@ const HomePage = () => {
   useEffect(() => {
     if(nowMessages){
       const param = nowMessages.split('chats:')[1];
-      // setTimeout(() => dispatch(addRobotMessage(param)), 1500)
-      dispatch(getPosts(param))
+      if(chats[param - 1]?.messages.length > 0 && chats[param - 1].messages.slice(-1)[0].author !== 'robot')  {
+        setTimeout(() => dispatch(fetchItems(param)), 1500)
+      }
     }
   },[chats])
 

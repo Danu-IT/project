@@ -7,14 +7,10 @@ const messageRobot = 'Привет, получил твое сообщение, 
 
 export const fetchItems = createAsyncThunk(
   'fetchItems',
-  async function(_,thunkApi){
-      const response = await fetch('https://jsonplaceholder.typicode.com/users')
-      const data = response.json()
-      // Промис
-      console.log(data)
-      return data
+  function(param,thunkApi){
+    return param
   }
-)
+) 
 
 export const chatSlice = createSlice({
     name: 'chat',
@@ -29,32 +25,22 @@ export const chatSlice = createSlice({
               })
            return answer
         },
-        addRobotMessage: (state, action) => {
-            if(state[action.payload - 1]?.messages.length > 0 && state[action.payload - 1].messages.slice(-1)[0].author !== 'robot')  {
-                const answer = [...state].map((chat, i) => {
-                  if(i === action.payload - 1){
-                    return {...chat, messages: [...chat.messages, {text: messageRobot, author: 'robot', id: v4(), time: timeNow()}]}
-                  }
-                  return chat 
-                })
-            return answer
-            }
-            return state;
-        },
         addChat: (state, action) => {
             return [...state, action.payload]
         },
-        getPosts:(state,action)=>{
-          console.log(action.payload)
-          state = action.payload
-      }
     },
     extraReducers:{
       [fetchItems.fulfilled]:(state,action)=>{
-          state = action.payload
+        const answer = [...state].map((chat, i) => {
+          if(i === action.payload - 1){
+            return {...chat, messages: [...chat.messages, {text: messageRobot, author: 'robot', id: v4(), time: timeNow()}]}
+          }
+          return chat 
+        })
+        return answer
       },
   }
 })
 
-export const { addMessage, addRobotMessage, addChat, getPosts } = chatSlice.actions;
+export const { addMessage, addChat } = chatSlice.actions;
 export default chatSlice.reducer;
