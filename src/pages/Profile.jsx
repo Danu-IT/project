@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { fetchPet } from '../store/petReducer';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const visible = useSelector(state => state);
-  const visibleContent = () => dispatch({type: 'TOGGLE'});
+  const pet = useSelector(state => state.pet)
+  useEffect(() => {
+    dispatch(fetchPet());
+  }, []);
+  const refreshImg = () => dispatch(fetchPet())
   return (
     <>
-       <input onChange={visibleContent} type='checkbox'></input>
-       {visible && <div>Изменияем Store</div>}
+    {!pet.loading ? <img width={'400px'} height={'400px'} src={pet.pets && pet.pets[0]}></img> : 'Загрузка...'}
+    {pet.error && <button onClick={refreshImg}>Загрузить повторно</button>}
     </>
 )}
 
